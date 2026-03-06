@@ -171,10 +171,10 @@ formData.append("deadline", form.deadline);
         formData.append("files", file);
       });
 
-      const res = await fetch("http://localhost:5000/api/projects", {
-        method: "POST",
-        body: formData,
-      });
+const res = await fetch(`${import.meta.env.VITE_API_URL}/api/project-request`, {
+  method: "POST",
+  body: formData
+});
 
       if (!res.ok) {
   const data = await res.json();
