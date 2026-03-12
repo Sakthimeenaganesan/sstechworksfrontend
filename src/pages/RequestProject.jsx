@@ -171,10 +171,13 @@ formData.append("deadline", form.deadline);
         formData.append("files", file);
       });
 
-const res = await fetch("https://sstechworksbackend.onrender.com/api/projects", {
-  method: "POST",
-  body: formData
-});
+const res = await fetch(
+  "https://sstechworksbackend.onrender.com/api/project-request",
+  {
+    method: "POST",
+    body: formData
+  }
+);
       if (!res.ok) {
   const data = await res.json();
   console.error(data);
