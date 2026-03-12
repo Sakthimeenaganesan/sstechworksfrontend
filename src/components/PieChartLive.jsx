@@ -26,7 +26,7 @@ export default function PieChartLive() {
         }
 
         const res = await fetch(
-          "http://localhost:5000/api/projects/stats",
+          "https://sstechworksbackend.onrender.com/api/projects/stats",
           {
             headers: {
               Authorization: `Bearer ${token}`,

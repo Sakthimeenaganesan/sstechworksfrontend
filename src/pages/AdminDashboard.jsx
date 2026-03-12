@@ -31,7 +31,7 @@ const fetchNotifications = async () => {
     const token = localStorage.getItem("adminToken");
 
     const res = await fetch(
-      "http://localhost:5000/api/notifications",
+      "https://sstechworksbackend.onrender.com/api/notifications",
       {
         headers: { Authorization: `Bearer ${token}` },
       }
@@ -57,7 +57,7 @@ const fetchDashboardData = async () => {
 
     /* ---------- STATS ---------- */
     const statsRes = await fetch(
-      "http://localhost:5000/api/projects/stats",
+      "https://sstechworksbackend.onrender.com/api/projects/stats",
       {
         headers: { Authorization: `Bearer ${token}` },
       }
@@ -72,7 +72,7 @@ const fetchDashboardData = async () => {
 
     /* ---------- PROJECTS ---------- */
     const projRes = await fetch(
-      "http://localhost:5000/api/projects",
+      "https://sstechworksbackend.onrender.com/api/projects",
       {
         headers: { Authorization: `Bearer ${token}` },
       }
@@ -188,7 +188,7 @@ const DeadlineList = React.memo(function DeadlineList({ projects }) {
   const updateStatus = async (id, newStatus) => {
     const token = localStorage.getItem("adminToken");
 
-    await fetch(`http://localhost:5000/api/projects/${id}`, {
+    await fetch(`https://sstechworksbackend.onrender.com/api/projects/${id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -210,7 +210,7 @@ const deleteProject = async (id) => {
   if (!window.confirm("Delete this project permanently?")) return;
 
   const res = await fetch(
-    `http://localhost:5000/api/projects/${id}`,
+    `https://sstechworksbackend.onrender.com/api/projects/${id}`,
     {
       method: "DELETE",
       headers: {
@@ -226,7 +226,7 @@ const deleteProject = async (id) => {
 
   // 🔥 REFETCH PROJECTS FROM DB
   const updated = await fetch(
-    "http://localhost:5000/api/projects",
+    "https://sstechworksbackend.onrender.com/api/projects",
     {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -299,7 +299,7 @@ return (
     const token = localStorage.getItem("adminToken");
 
     await fetch(
-      `http://localhost:5000/api/notifications/${n._id}`,
+      `https://sstechworksbackend.onrender.com/api/notifications/${n._id}`,
       {
         method: "PATCH",
         headers: {
@@ -598,7 +598,7 @@ function ProjectModal({ project, onClose, onUpdate }) {
     const token = localStorage.getItem("adminToken");
 
     const res = await fetch(
-      `http://localhost:5000/api/projects/${project._id}/tasks`,
+      `https://sstechworksbackend.onrender.com/api/projects/${project._id}/tasks`,
       {
         method: "POST",
         headers: {
@@ -633,7 +633,7 @@ setTasks(updatedProject.tasks || []);
     const token = localStorage.getItem("adminToken");
 
     const res = await fetch(
-      `http://localhost:5000/api/projects/${project._id}/tasks/${taskId}`,
+      `https://sstechworksbackend.onrender.com/api/projects/${project._id}/tasks/${taskId}`,
       {
         method: "PATCH",
         headers: {
@@ -656,7 +656,7 @@ setTasks(updatedProject.tasks || []);
     const token = localStorage.getItem("adminToken");
 
     const res = await fetch(
-      `http://localhost:5000/api/projects/${project._id}/tasks/${taskId}`,
+      `https://sstechworksbackend.onrender.com/api/projects/${project._id}/tasks/${taskId}`,
       {
         method: "DELETE",
         headers: {
@@ -856,7 +856,7 @@ const progress =
   <div className="space-y-2 mt-2">
     {project.files.map((file, i) => {
       const cleanPath = file.replace(/^.*uploads[\\/]/, "uploads/");
-const url = `http://localhost:5000/${cleanPath}`;
+const url = `https://sstechworksbackend.onrender.com/${cleanPath}`;
 
 
       return (
