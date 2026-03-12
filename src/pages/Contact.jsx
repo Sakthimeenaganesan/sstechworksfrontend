@@ -82,8 +82,11 @@ export default function Contact() {
 
       });
 
-      if (!res.ok)
-        throw new Error("Failed");
+if (!res.ok) {
+  const data = await res.json();
+  console.error(data);
+  throw new Error(data.message || "Failed");
+}
 
       setSuccess(true);
 

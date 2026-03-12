@@ -3,10 +3,12 @@ import { useState, useEffect } from "react";
 import adminBg from "../assets/admin.png";
 import meenaImg from "../assets/team/meena.jpeg";
 import sathiyaImg from "../assets/team/sathiya.jpeg";
-import companyImg from "../assets/Logo.png"; // add company logo image
+import companyImg from "../assets/Logo.png";
 
 export default function AdminLogin() {
   const navigate = useNavigate();
+
+  const API_URL = "https://sstechworksbackend.onrender.com";
 
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
@@ -24,6 +26,7 @@ export default function AdminLogin() {
   const cleanEmail = email.toLowerCase().trim();
 
   /* ================= MOUNT ================= */
+
   useEffect(() => {
     setMounted(true);
 
@@ -32,6 +35,7 @@ export default function AdminLogin() {
   }, [navigate]);
 
   /* ================= LOCK TIMER ================= */
+
   useEffect(() => {
     if (!locked) return;
 
@@ -51,6 +55,7 @@ export default function AdminLogin() {
   }, [locked]);
 
   /* ================= USER AVATAR ================= */
+
   const getUserData = () => {
     if (cleanEmail === "sakthimeena.gp03@gmail.com")
       return { name: "Sakthimeena", avatar: meenaImg };
@@ -67,6 +72,7 @@ export default function AdminLogin() {
   const { name, avatar } = getUserData();
 
   /* ================= LAST LOGIN ================= */
+
   useEffect(() => {
     if (!name) {
       setLastLoginText("");
@@ -91,6 +97,7 @@ export default function AdminLogin() {
   }, [cleanEmail, name]);
 
   /* ================= LOGIN ================= */
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
@@ -98,17 +105,14 @@ export default function AdminLogin() {
     if (locked || loginSuccess) return;
 
     try {
-      const res = await fetch(
-        "http://localhost:5000/api/admin/login",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            email: cleanEmail,
-            password,
-          }),
-        }
-      );
+      const res = await fetch(`${API_URL}/api/admin/login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: cleanEmail,
+          password
+        })
+      });
 
       const data = await res.json();
 
@@ -165,6 +169,7 @@ export default function AdminLogin() {
       >
 
         {/* Avatar */}
+
         <div className="flex justify-center pt-8">
           {avatar ? (
             <img
@@ -180,6 +185,7 @@ export default function AdminLogin() {
         </div>
 
         {/* Header */}
+
         <div className="text-center px-6 pt-4 pb-4 border-b">
           <h1 className="text-lg font-semibold">
             Admin Login
@@ -245,16 +251,6 @@ export default function AdminLogin() {
           </h2>
         </div>
       )}
-
-      <style>{`
-        @keyframes cardBounce {
-          0% { transform: translateY(40px); opacity: 0; }
-          100% { transform: translateY(0); opacity: 1; }
-        }
-        .animate-card-bounce {
-          animation: cardBounce 0.6s ease-out;
-        }
-      `}</style>
 
     </div>
   );
