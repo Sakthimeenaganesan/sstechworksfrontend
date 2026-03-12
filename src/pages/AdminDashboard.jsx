@@ -602,7 +602,7 @@ function ProjectModal({ project, onClose, onUpdate }) {
     const token = localStorage.getItem("adminToken");
 
     const res = await fetch(
-      `https://sstechworksbackend.onrender.com/api/projects/${project._id}/tasks`,
+      `https://sstechworksbackend.onrender.com/api/project-request/${project._id}/tasks`,
       {
         method: "POST",
         headers: {
@@ -638,7 +638,7 @@ setTasks(updatedProject.tasks || []);
     const token = localStorage.getItem("adminToken");
 
     const res = await fetch(
-      `https://sstechworksbackend.onrender.com/api/projects/${project._id}/tasks/${taskId}`,
+      `https://sstechworksbackend.onrender.com/api/project-request/${project._id}/tasks/${taskId}`,
       {
         method: "PATCH",
         headers: {
@@ -662,7 +662,7 @@ setTasks(updatedProject.tasks || []);
     const token = localStorage.getItem("adminToken");
 
     const res = await fetch(
-      `https://sstechworksbackend.onrender.com/api/projects/${project._id}/tasks/${taskId}`,
+      `https://sstechworksbackend.onrender.com/api/project-request/${project._id}/tasks/${taskId}`,
       {
         method: "DELETE",
         headers: {
