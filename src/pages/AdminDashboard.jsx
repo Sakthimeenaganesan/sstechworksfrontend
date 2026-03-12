@@ -57,7 +57,7 @@ const fetchDashboardData = async () => {
 
     /* ---------- STATS ---------- */
     const statsRes = await fetch(
-      "https://sstechworksbackend.onrender.com/api/projects/stats",
+      "https://sstechworksbackend.onrender.com/api/project-request/stats",
       {
         headers: { Authorization: `Bearer ${token}` },
       }
@@ -71,12 +71,12 @@ const fetchDashboardData = async () => {
     }
 
     /* ---------- PROJECTS ---------- */
-    const projRes = await fetch(
-      "https://sstechworksbackend.onrender.com/api/projects",
-      {
-        headers: { Authorization: `Bearer ${token}` },
-      }
-    );
+   const projRes = await fetch(
+  "https://sstechworksbackend.onrender.com/api/project-request",
+  {
+    headers: { Authorization: `Bearer ${token}` },
+  }
+);
 
     if (!projRes.ok) {
       console.error("Projects failed:", projRes.status);
@@ -188,11 +188,12 @@ const DeadlineList = React.memo(function DeadlineList({ projects }) {
   const updateStatus = async (id, newStatus) => {
     const token = localStorage.getItem("adminToken");
 
-    await fetch(`https://sstechworksbackend.onrender.com/api/projects/${id}`, {
+   await fetch(`https://sstechworksbackend.onrender.com/api/project-request/${id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
+         "Content-Type": "application/json"
       },
       body: JSON.stringify({ status: newStatus }),
     });
@@ -215,6 +216,7 @@ const deleteProject = async (id) => {
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${token}`,
+         "Content-Type": "application/json"
       },
     }
   );
@@ -226,10 +228,11 @@ const deleteProject = async (id) => {
 
   // 🔥 REFETCH PROJECTS FROM DB
   const updated = await fetch(
-    "https://sstechworksbackend.onrender.com/api/projects",
+    "https://sstechworksbackend.onrender.com/api/projects-request",
     {
       headers: {
         Authorization: `Bearer ${token}`,
+         "Content-Type": "application/json"
       },
     }
   );
@@ -303,7 +306,8 @@ return (
       {
         method: "PATCH",
         headers: {
-          Authorization: `Bearer ${token}`,
+                Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json"
         },
       }
     );
@@ -604,6 +608,7 @@ function ProjectModal({ project, onClose, onUpdate }) {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
+           "Content-Type": "application/json"
         },
        body: JSON.stringify({
   title: taskText,
@@ -638,6 +643,7 @@ setTasks(updatedProject.tasks || []);
         method: "PATCH",
         headers: {
           Authorization: `Bearer ${token}`,
+           "Content-Type": "application/json"
         },
       }
     );
@@ -661,6 +667,7 @@ setTasks(updatedProject.tasks || []);
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,
+           "Content-Type": "application/json"
         },
       }
     );
